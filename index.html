@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie + Caleb Wedding</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Iansui:wght@400&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Iansui', Arial, sans-serif; /* Updated font */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .hero-section {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color: #F8F7F5;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .hero-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 66%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: #F8F7F5;
+            font-size: 4rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .mute-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .mute-toggle::before {
+            content: '\1F50A';
+            font-size: 24px;
+            color: #808080;
+        }
+
+        .mute-toggle.muted::before {
+            content: '\1F507';
+        }
+
+        /* How They Met Section */
+        .how-they-met-section {
+            background-color: #E8ECEF;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .how-they-met-section h2 {
+            color: #A3BFFA;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .how-they-met-section p {
+            font-size: 1.2rem;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background-color: #F8F7F5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .timeline-section h2 {
+            color: #A3BFFA;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background-color: #A3BFFA;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-date, .timeline-content {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #A3BFFA;
+            font-size: 1.2rem;
+        }
+
+        .timeline-content {
+            background-color: #F8F7F5;
+            border: 2px solid #A3BFFA;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-top: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .studs {
+            position: absolute;
+            top: -20px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stud {
+            width: 30px;
+            height: 20px;
+            background-color: #F8F7F5;
+            border: 2px solid #A3BFFA;
+            border-radius: 2px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-image {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin: 10px auto;
+            display: block;
+            border: 2px solid #A3BFFA;
+            border-radius: 5px;
+        }
+
+        /* RSVP Section */
+        .rsvp-section {
+            background-color: #F8F7F5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .rsvp-section h2 {
+            color: #A3BFFA;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .rsvp-section p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        /* Wedding Assembly Instructions Section */
+        .instructions-section {
+            background-color: #E8ECEF;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .instructions-section h2 {
+            color: #A3BFFA;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .instructions {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .instruction-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .step-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #A3BFFA;
+            margin-right: 20px;
+        }
+
+        .step-image {
+            width: 30%;
+            padding: 10px;
+        }
+
+        .step-image img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #A3BFFA;
+            border-radius: 5px;
+        }
+
+        .step-content {
+            width: 70%;
+            padding: 10px;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .map-embed {
+            margin-top: 20px;
+            width: 100%;
+            height: 300px;
+            border: 2px solid #A3BFFA;
+            border-radius: 5px;
+        }
+
+        /* Wedding Registry Section */
+        .registry-section {
+            background-color: #F8F7F5;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .registry-section h2 {
+            color: #A3BFFA;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .registry-section p {
+            font-size: 1.2rem;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        /* Footer Section */
+        .footer-section {
+            background-color: #E8ECEF;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-section p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Shared link styles */
+        a {
+            color: #A3BFFA;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #7a9bfc;
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-text {
+                font-size: 2.5rem;
+            }
+
+            .mute-toggle {
+                width: 30px;
+                height: 30px;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .mute-toggle::before {
+                font-size: 18px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item, .timeline-item:nth-child(even) {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .timeline-date, .timeline-content {
+                width: 100%;
+                text-align: center;
+            }
+
+            .timeline-date {
+                padding-bottom: 10px;
+            }
+
+            .studs {
+                left: 15%;
+                right: 15%;
+            }
+
+            .how-they-met-section h2, .timeline-section h2, .rsvp-section h2, .instructions-section h2, .registry-section h2 {
+                font-size: 2rem;
+            }
+
+            .how-they-met-section p, .rsvp-section p, .registry-section p {
+                font-size: 1rem;
+            }
+
+            .instruction-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .step-image, .step-content {
+                width: 100%;
+            }
+
+            .map-embed {
+                height: 200px;
+            }
+
+            .footer-section p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="AnnieCalebHero.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="mute-toggle"></div>
+        <h1 class="hero-text">Annie + Caleb</h1>
+    </section>
+
+    <section class="how-they-met-section">
+        <h2>How Annie and Caleb met</h2>
+        <p>When Annie first met Caleb, it was at the opening night of Abide Christian Fellowship at Purdue, where Caleb was playing the keyboard during worship. Caleb put in a glissando, and she was NOT IMPRESSED. Then, they started dating.</p>
+    </section>
+
+    <section class="timeline-section">
+        <h2>The LEGOs that accompanied our relationship</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">February 2022</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>Caleb gives Annie a LEGO Cherry Blossom Bonsai Tree in lieu of flowers on their first date</p>
+                    <img src="lego-cherry-blossom-bonsai.png" alt="LEGO Cherry Blossom Bonsai Tree" class="timeline-image">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">May 2022</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>Caleb gives Annie LEGO Orchids in celebration of her college graduation</p>
+                    <img src="lego-orchids-graduation.png" alt="LEGO Orchids" class="timeline-image">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">July 2022</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>Annie surprises Caleb with a LEGO Treehouse to build together when she visits him on his internship in San Jose</p>
+                    <img src="lego-treehouse-san-jose.jpg" alt="LEGO Treehouse from San Jose Internship" class="timeline-image">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">March 2023</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>Still at Purdue, Caleb orders LEGO Succulents to be delivered to Annie in Seattle, an "I'm thinking of you" token while they were on long distance</p>
+                    <img src="lego-succulents-long-distance.png" alt="LEGO Succulents" class="timeline-image">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">February 2024</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>First Valentine's Day together in Austin! Annie and Caleb buy LEGO Roses from Costco #SoRomantic</p>
+                    <img src="lego-roses-valentines.png" alt="LEGO Roses from Valentine's Day in Austin" class="timeline-image">
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">September 2024</div>
+                <div class="timeline-content">
+                    <div class="studs">
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                        <div class="stud"></div>
+                    </div>
+                    <p>Caleb proposes to Annie during a Texas sunset, giving her a ring and of course, a bouquet of LEGO Wildflowers</p>
+                    <img src="lego-wildflowers-proposal.png" alt="LEGO Wildflowers" class="timeline-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="rsvp-section">
+        <h2>RSVP</h2>
+        <p>Coming? Not coming? Please <a href="https://docs.google.com/forms/d/e/1FAIpQLScweanfzfahqUAF2OQC_aMONaaH0OTCCxJeG1MVuf_pEq6PjQ/viewform?usp=header" target="_blank">click here</a> to RSVP using your unique RSVP code we sent you!</p>
+    </section>
+
+    <section class="instructions-section">
+        <h2>Wedding Assembly Instructions</h2>
+        <div class="instructions">
+            <div class="instruction-step">
+                <span class="step-number">1.</span>
+                <div class="step-image">
+                    <img src="travel-to-austin.jpg" alt="Travel to Austin">
+                </div>
+                <div class="step-content">
+                    <h3>Travel to Austin</h3>
+                    <p>Austin-Bergstrom International Airport (AUS) is the closest airport, found in the Capitol of the Greatest Country in the World. From there, our wedding venue is in range of Uber, Lyft, etc. Airport tip: If you need to eat something at AUS, try The Peached Tortilla for some Asian-influenced Tex-Mex.</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <span class="step-number">2.</span>
+                <div class="step-image">
+                    <img src="stay-in-austin.jpg" alt="Stay in Austin">
+                </div>
+                <div class="step-content">
+                    <h3>Stay in Austin</h3>
+                    <p>For overnight accommodations, have a look in the Lakeway or Four Points neighborhoods of Austin. Hotels like <a href="https://maps.app.goo.gl/DrwfrdDDPShdE3sd8" target="_blank">this Holiday Inn Express</a> and <a href="https://maps.app.goo.gl/GGStEG7biKWZKRRbA" target="_blank">this Residence Inn</a> (if you need more space) are within 15 minutes of the venue. We’d be remiss to forget to mention the delightful, family-owned <a href="https://maps.app.goo.gl/H8iZo7mXZ5vyebJcA" target="_blank">Drury Inn</a> (although it’s further from the venue).</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <span class="step-number">3.</span>
+                <div class="step-image">
+                    <img src="get-dressed-for-wedding.jpg" alt="Get Dressed for the Wedding">
+                </div>
+                <div class="step-content">
+                    <h3>Get dressed</h3>
+                    <p>Wear something comfortable, dressy casual! It'll be outdoors (November in Austin is generally mild, but we'll have heat lamps if things get too chilly by Texas standards).</p>
+                </div>
+            </div>
+            <div class="instruction-step">
+                <span class="step-number">4.</span>
+                <div class="step-image">
+                    <img src="celebrate-at-hudson-bend.jpg" alt="Celebrate at Hudson Bend Ranch">
+                </div>
+                <div class="step-content">
+                    <h3>Come celebrate!</h3>
+                    <p>See you at Hudson Bend Ranch at 5102 Doss Rd, Austin, TX 78734!</p>
+                    <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3440.6202177934874!2d-97.9414774709157!3d30.418515335421297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x865b314bdf883649%3A0xa19e89b6e9804e3!2sHudson%20Bend%20Ranch!5e0!3m2!1sen!2sus!4v1741563184884!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="registry-section">
+        <h2>Wedding Registry</h2>
+        <p>It already means the world to us that you’d want to attend our wedding, so we chose not to make a gift registry. Please feel zero pressure to give us anything!</p>
+        <p>But if you’d still like to celebrate by giving us something, we’ll accept with gratitude -- something like <a href="https://www.amazon.com/gift-cards" target="_blank">Amazon gift cards</a> or <a href="https://www.chick-fil-a.com/gift-cards" target="_blank">Chick-fil-A gift cards</a> are great since they don’t physically take up much space (or you can email-deliver them to anniecaleb@sqm.simplelogin.com)!</p>
+    </section>
+
+    <section class="footer-section">
+        <p>Made with love 💖 by Caleb and Annie. With some help and super-cool designed elements from Carey Tung, Charisse Chua, and of course, xAI's Grok 3. Oh yeah, and Gustavus and Harrison.</p>
+    </section>
+
+    <script>
+        // Wait for all resources to load before showing the page
+        window.addEventListener('load', function() {
+            document.body.classList.add('loaded');
+        });
+
+        // Parallax effect for hero video
+        window.addEventListener('scroll', function() {
+            const heroVideo = document.querySelector('.hero-video');
+            let scrollPosition = window.pageYOffset;
+            heroVideo.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+        });
+
+        // Mute toggle functionality
+        const video = document.querySelector('.hero-video');
+        const muteToggle = document.querySelector('.mute-toggle');
+
+        muteToggle.addEventListener('click', function() {
+            if (video.muted) {
+                video.muted = false;
+                muteToggle.classList.remove('muted');
+            } else {
+                video.muted = true;
+                muteToggle.classList.add('muted');
+            }
+        });
+    </script>
+</body>
+</html>
