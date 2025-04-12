@@ -26,11 +26,11 @@
             font-style: normal;
         }
 
-
         body {
             font-family: 'Futura PT', sans-serif;
             color: #333;
             overflow-x: hidden;
+            max-width: 100vw;
         }
 
         /* Navigation */
@@ -38,6 +38,7 @@
             position: fixed;
             top: 0;
             width: 100%;
+            max-width: 100vw;
             z-index: 1000;
             padding: 10px 20px;
             display: flex;
@@ -78,11 +79,20 @@
             color: #fff;
             font-size: 30px;
             text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            transition: text-shadow 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 0.8);
         }
 
         .nav-menu a.scrolled {
             color: #1a2a44;
             text-shadow: none;
+        }
+
+        .nav-menu a.scrolled:hover {
+            text-shadow: 0 0 10px rgba(26, 42, 68, 0.8), 0 0 20px rgba(26, 42, 68, 0.6);
         }
 
         @media (max-width: 768px) {
@@ -99,6 +109,7 @@
                 background: rgba(255, 255, 255, 0.95);
                 padding: 20px;
                 border-radius: 5px;
+                max-width: calc(100vw - 40px);
             }
 
             .nav-menu.active {
@@ -114,6 +125,10 @@
                 text-shadow: none;
                 font-size: 30px;
             }
+
+            .nav-menu a:hover {
+                text-shadow: 0 0 10px rgba(26, 42, 68, 0.8), 0 0 20px rgba(26, 42, 68, 0.6);
+            }
         }
 
         /* Hero Section */
@@ -121,6 +136,7 @@
             position: relative;
             height: 100vh;
             overflow: hidden;
+            max-width: 100vw;
         }
 
         .hero-video {
@@ -189,6 +205,7 @@
             flex-direction: column;
             align-items: center;
             min-height: auto;
+            max-width: 100vw;
         }
 
         .section-cream {
@@ -209,6 +226,7 @@
             width: auto;
             display: block;
             margin: 0 auto;
+            max-width: 100%;
         }
 
         .rsvp-button {
@@ -221,14 +239,18 @@
             width: auto;
             display: block;
             margin: 0 auto;
+            max-width: 100%;
         }
 
         .section-content {
             max-width: 1000px;
+            width: 100%;
             font-family: 'Futura PT', sans-serif;
             color: #333;
             font-size: 22.5px;
             line-height: 1.6;
+            padding: 0 10px;
+            box-sizing: border-box;
         }
 
         .section-content p {
@@ -253,6 +275,7 @@
             object-fit: contain;
             display: block;
             border: 1px solid #e0e0e0;
+            max-width: 100%;
         }
 
         .polaroid-caption {
@@ -270,6 +293,7 @@
             justify-content: center;
             align-items: center;
             max-width: 1000px;
+            width: 100%;
         }
 
         .new-life-polaroid {
@@ -290,6 +314,7 @@
             align-items: center;
             margin: 40px 0;
             max-width: 1000px;
+            width: 100%;
         }
 
         .instructions-media {
@@ -315,12 +340,14 @@
             height: auto;
             border: 5px solid #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 100%;
         }
 
         .map-embed {
             width: 300px;
             height: 450px;
             border: 0;
+            max-width: 100%;
         }
 
         /* Registry Layout */
@@ -330,6 +357,7 @@
             justify-content: center;
             align-items: center;
             max-width: 1000px;
+            width: 100%;
         }
 
         .registry-text {
@@ -347,6 +375,7 @@
         .timeline {
             position: relative;
             max-width: 1000px;
+            width: 100%;
             margin: 0 auto;
         }
 
@@ -438,6 +467,7 @@
             background: #fff;
             padding: 20px;
             text-align: center;
+            max-width: 100vw;
         }
 
         .footer-text {
@@ -603,7 +633,7 @@
                 <div class="new-life-polaroid">
                     <div class="polaroid" style="transform: rotate(-5deg);">
                         <img src="media/gustavus-harrison.svg" alt="Gustavus Harrison">
-                        <div class="polaroid-caption">#HEHE</div>
+                        <div class=" semn-polaroid-caption">#HEHE</div>
                     </div>
                 </div>
                 <div class="new-life-text">
@@ -754,7 +784,7 @@
                 <div class="registry-text">
                     <p>We chose not to make a gift registry. It already means the world to us that so many of yall are dropping everything just to attend our wedding -- please feel zero pressure to give us anything!</p>
                     <p>But if you still want to celebrate with a gift, we'll accept something small with gratitude!</p>
-                    <p>Please use anniecaleb@sqm.simplelogin.com for any e-gift cards 😌</p>
+                    <p>Please use <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a2838c8c8b8781838e8780a291938fcc918b8f928e878e8d858b8ccc818d8f">[email&#160;protected]</a> for any e-gift cards 😌</p>
                 </div>
                 <div class="registry-image">
                     <div class="polaroid" style="transform: rotate(7deg);">
@@ -779,7 +809,8 @@
         <p class="footer-text">Made with love 💖 by Caleb and Annie. With some help and super-cool designed media from Carey Tung, Charisse Chua, and of course, xAI's Grok 3. Oh yeah, and Gustavus and Harrison.</p>
     </section>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
         // Hamburger Menu Toggle
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
@@ -822,5 +853,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92edd5b19ace135d',t:'MTc0NDQwOTY0My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
