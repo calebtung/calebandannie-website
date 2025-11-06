@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subtitle Extractor</title>
+</head>
+<body>
+    <h1>Upload MKV File to Extract Subtitles</h1>
+    <input type="file" id="fileInput" accept=".mkv">
+    <button id="extractButton" onclick="extractSubtitles()" disabled>Extract</button>
+    <pre id="subtitles"></pre>
+    <script src="https://unpkg.com/@ffmpeg/core@0.12.7/dist/umd/ffmpeg-core.js"></script>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
